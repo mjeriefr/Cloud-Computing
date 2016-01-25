@@ -1,1 +1,1 @@
-A simple HTML and JavaScript application. This is homework #1 for the Cloud Computing course.
+This is all my projects for Paul Talaga's Cloud Computing course, Spring 2016. 
