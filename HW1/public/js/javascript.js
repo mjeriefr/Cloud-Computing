@@ -1,9 +1,10 @@
 (function(){
-	/*document.getElementById("button").onclick = function() {
-		document.getElementById("result").innerHTML = "output!!";
-	};*/
-	
 	document.getElementById("button").addEventListener("click", function(){
-		document.getElementById("result").innerHTML = "output!!";
-	};
-});
+		first = parseInt(document.getElementById("first").value);
+		second = parseInt(document.getElementById("second").value);
+		
+		sum = first + second;
+		
+		document.getElementById("result").innerHTML = sum;
+	});
+}());
