@@ -6,6 +6,6 @@ app.configure(function() {
   app.use(express.static(__dirname + '/public'));
 });
 
-var port = 8080;
+var port = 80;
 app.listen(port);
 console.log('Express server started on port %s', port);
