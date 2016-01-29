@@ -1,0 +1,10 @@
+This is how you should forward port 80 to port 8080. 
+This allows you to not run your node.js application as root. (good!)
+[[See http://proghowto.com/iptables-redirect-port-80-to-port-8080]]
+
+Run this:
+
+sudo iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -i eth0 -p tcp --dport 8080 -j ACCEPT
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+
