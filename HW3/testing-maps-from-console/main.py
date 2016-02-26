@@ -1,19 +1,3 @@
-#!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 import cgi
 import datetime
 import webapp2
@@ -31,7 +15,20 @@ class Greeting(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
   def get(self):
-    self.response.out.write('<html><body>')
+    self.response.out.write("""<html><body>
+                            <h1>Chipotle Burnt My Chicken!</h1>
+                            <strong>Are you fed up with burnt chicken at Chipotle? Let them know here!</strong><br />
+                            Tell us which Chipotle location burnt your chicken, and we'll save the date and time to this map.<br /><br />""")
+
+    GMAPS_API_KEY = "AIzaSyB16N6RHY71J_sZlGupTntG4vvx1rF_rGc"
+    self.response.out.write("""
+      <iframe
+        width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=""" + GMAPS_API_KEY + """
+          &q=Space+Needle,Seattle+WA" allowfullscreen>
+      </iframe><br />""")
 	
     greetings = ndb.gql('SELECT * '
                         'FROM Greeting '
@@ -52,13 +49,19 @@ class MainPage(webapp2.RequestHandler):
 
     self.response.out.write("""
           <form action="/sign" method="post">
-            <div><textarea name="content" rows="3" cols="60"></textarea></div>
-            <div><input type="submit" value="Sign Guestbook"></div>
-          </form>
+            <div><textarea name="content" rows="3" cols="60" value="Chipotle location"></textarea></div>
+            <div><input type="submit" value="They burnt my chicken!!!"></div>
+          </form>""")
+
+    self.response.out.write("""
+          <br /><br /><br /><br />
+          <div style="font-style:italic">
+            Dear Chipotle, <br />
+            It's just a homework assignment, bro. Please don't sue me for libel.<br />
+            But seriously, please stop serving me blackened chicken.
+          </div>
         </body>
       </html>""")
-	  
-    self.response.out.write('out')
 
 
 class Guestbook(webapp2.RequestHandler):
