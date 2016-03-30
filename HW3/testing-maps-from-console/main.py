@@ -54,15 +54,8 @@ class MainPage(webapp2.RequestHandler):
     self.response.out.write("""
       <img width="600" src="http://maps.googleapis.com/maps/api/staticmap?center=united+states&zoom=3&scale=false&size=600x300&maptype=roadmap&key=AIzaSyB16N6RHY71J_sZlGupTntG4vvx1rF_rGc&format=png&visual_refresh=true
       &markers=size:large%7color:0xff0000%7c""" + str(newInputCoord[0]) + """,+""" + str(newInputCoord[1]) + """
-      ">""") #It's 50 minutes before this is due. This should be in an array, and display multiple markers.
-##    self.response.out.write("""
-##      <iframe
-##        width="600"
-##        height="450"
-##        frameborder="0" style="border:0"
-##        src="https://www.google.com/maps/embed/v1/place?key=""" + GMAPS_API_KEY + """
-##          &q=""" + str(newInputCoord[0]) + "," + str(newInputCoord[1]) + """+Chipotle" allowfullscreen>
-##      </iframe><br />""")
+      ">""")
+    # This is the correct way to display map with multiple markers: https://jsfiddle.net/geocodezip/b0hd3911/
 
 
     self.response.out.write("""
