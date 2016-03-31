@@ -45,7 +45,7 @@ datasource = dict( (k[0], k[1:]) for k in bins)
 
 def mapfn(k, v):
     print "map"
-    yield k, v
+    #yield k, v
     limit = v[len(v)-1]
     print "limit is", limit
     a = [True] * limit
@@ -53,12 +53,16 @@ def mapfn(k, v):
     for (i, isprime) in enumerate(a):
         if isprime:
             #print "yield i", i
+            yield k, i
             for n in xrange(i*i, limit, i):     # Mark factors non-prime
                 a[n] = False
     print "a is", a
-    for (i, isprime) in enumerate(a):
-        print i, "is", isprime
-        yield k, i
+    for i in range(0, len(a)-1):
+        print i, "is", a[i]
+        #yield k, i
+    #for (i, isprime) in enumerate(a):
+        #print i, "is", isprime
+        #yield k, i
         
 ##        if isprime:
 ##            #print "We have a prime", i
@@ -86,7 +90,8 @@ def mapfn(k, v):
 
 def reducefn(k, x):
     print "reduce"
-    print "k is", k, " x is", x
+    #print "k is", k, " x is", x
+    #return x[0]
     return x
 
 
@@ -120,5 +125,11 @@ s.reducefn = reducefn
 
 results = s.run_server(password="changeme")
 print results
+##everything = []
+##for arr in results:
+##    for item in results[arr]:
+##        everything.append(item)
+##everything = sorted(everything)
+##print everything
 print "done"
 
