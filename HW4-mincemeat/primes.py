@@ -4,10 +4,11 @@ file = open('small.txt', 'r')
 data = list(file)
 file.close()
 
-array = range(3, 31, 2)
-bins = [[0],[1],[2],[3],[4]]
+array = range(3, 801, 2)
+#bins = [[0],[1],[2],[3],[4]]
+bins = [[0]]
 for i in array:
-    bins[i%5].append(i)
+    bins[i%1].append(i)
 datasource = dict( (k[0], k[1:]) for k in bins)
 #print datasource
 
@@ -51,14 +52,18 @@ def mapfn(k, v):
     a = [True] * limit
     a[0] = a[1] = False
     for (i, isprime) in enumerate(a):
+        if not (str(i) == str(i)[::-1]):
+            #print i, " is not a palindrome"
+            a[i] = False
+    for (i, isprime) in enumerate(a):
         if isprime:
             #print "yield i", i
             yield k, i
             for n in xrange(i*i, limit, i):     # Mark factors non-prime
                 a[n] = False
     print "a is", a
-    for i in range(0, len(a)-1):
-        print i, "is", a[i]
+    #for i in range(0, len(a)-1):
+        #print i, "is", a[i]
         #yield k, i
     #for (i, isprime) in enumerate(a):
         #print i, "is", isprime
