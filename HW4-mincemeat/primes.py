@@ -36,7 +36,7 @@ print "Elapsed time for creating bins is", elapsed_bins, "seconds"
 
 def mapfn(k, v):
     import math
-    print "Start map. k is", k, "v is", v
+    #print "Start map. k is", k, "v is", v
     for obj in v:
         if not (str(obj) == str(obj)[::-1]):
             continue
@@ -59,7 +59,7 @@ def mapfn(k, v):
 
 
 def reducefn(k, x):
-    print "reduce", k
+    #print "reduce", k
     #print "k is", k, " x is", x
     #return x[0]
     return x
@@ -82,6 +82,6 @@ for iBin in results:
         totalResults.append(item)
         #print item
 totalResults.sort()
-print "length of results", len(totalResults)
-print "sum of results", sum(totalResults)
-#print totalResults
+#print "length of results", len(totalResults)
+#print "sum of results", sum(totalResults)
+print totalResults
