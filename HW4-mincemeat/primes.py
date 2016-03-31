@@ -31,37 +31,13 @@ for (i, obj) in enumerate(array):
 #bins[0] = bins[0] + missingValues
 datasource = dict( (k[0], k[1:]) for k in bins)
 #print "datasource is", datasource
-for i in range(len(bins)-1):
-    print "Bin", i, "has length", len(bins[i])
 elapsed_bins = timeit.default_timer() - start_bins
 print "Elapsed time for creating bins is", elapsed_bins, "seconds"
 
-##def mapfn(k, v):
-##    #print "map"
-##    limit = v[len(v)-1]
-##    #print "limit is", limit
-##    a = [True] * limit
-##    a[0] = a[1] = False
-##    for (i, isprime) in enumerate(a):
-##        if not (str(i) == str(i)[::-1]):
-##            #print i, " is not a palindrome"
-##            a[i] = False
-##    for (i, isprime) in enumerate(a):
-##        if isprime:
-##            #print "yield i", i
-##            yield k, i
-##            for n in xrange(i*i, limit, i):
-##                a[n] = False
-##    #print "a is", a
 def mapfn(k, v):
     import math
     print "Start map. k is", k, "v is", v
     for obj in v:
-        #print "obj is", obj
-        #if obj % 2 == 0:
-        #    continue
-        #if obj % 3 == 0:
-        #    continue
         if not (str(obj) == str(obj)[::-1]):
             continue
 
