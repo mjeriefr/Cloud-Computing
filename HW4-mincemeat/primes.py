@@ -1,11 +1,7 @@
 import mincemeat
 
-file = open('small.txt', 'r')
-data = list(file)
-file.close()
-
-array = range(3, 801, 2)
-#bins = [[0],[1],[2],[3],[4]]
+array = range(3, 10001, 2)
+bins = [[0],[1],[2],[3],[4]]
 bins = [[0]]
 for i in array:
     bins[i%1].append(i)
@@ -15,7 +11,7 @@ datasource = dict( (k[0], k[1:]) for k in bins)
 def mapfn(k, v):
     print "map"
     limit = v[len(v)-1]
-    print "limit is", limit
+    #print "limit is", limit
     a = [True] * limit
     a[0] = a[1] = False
     for (i, isprime) in enumerate(a):
@@ -28,11 +24,11 @@ def mapfn(k, v):
             yield k, i
             for n in xrange(i*i, limit, i):
                 a[n] = False
-    print "a is", a
+    #print "a is", a
 
 
 def reducefn(k, x):
-    print "reduce"
+    #print "reduce"
     #print "k is", k, " x is", x
     #return x[0]
     return x
