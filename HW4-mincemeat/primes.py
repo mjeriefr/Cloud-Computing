@@ -2,9 +2,9 @@ import mincemeat
 import timeit
 
 start_bins = timeit.default_timer()
-array = range(5, 9999, 2)
+#array = range(23, 301, 2)
+array = range(2000000, 10000000)
 bins = [[0],[1],[2],[3],[4],[5],[6]]
-#bins = [[0]]
 for (i, obj) in enumerate(array):
     if obj % 2 == 0:
         continue
@@ -26,9 +26,9 @@ for (i, obj) in enumerate(array):
         continue
     if obj % 23 == 0:
         continue
-    bins[obj%7].append(obj)
-missingValues = [2, 3, 5, 7, 9, 11, 13, 17, 19, 23]
-bins[0] = bins[0] + missingValues
+    bins[obj%7] += [obj]
+#missingValues = [2, 3, 5, 7, 9, 11, 13, 17, 19, 23]
+#bins[0] = bins[0] + missingValues
 datasource = dict( (k[0], k[1:]) for k in bins)
 #print "datasource is", datasource
 for i in range(len(bins)-1):
@@ -83,7 +83,7 @@ def mapfn(k, v):
 
 
 def reducefn(k, x):
-    print "reduce"
+    print "reduce", k
     #print "k is", k, " x is", x
     #return x[0]
     return x
@@ -99,6 +99,13 @@ s.reducefn = reducefn
 results = s.run_server(password="changeme")
 elapsed = timeit.default_timer() - start_time
 print "Total time", elapsed, "seconds"
-print results
-print "done"
-
+#print results
+totalResults = []
+for iBin in results:
+    for item in results[iBin]:
+        totalResults.append(item)
+        #print item
+totalResults.sort()
+print "length of results", len(totalResults)
+print "sum of results", sum(totalResults)
+#print totalResults
