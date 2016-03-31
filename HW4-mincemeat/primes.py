@@ -73,7 +73,7 @@ s.mapfn = mapfn
 s.reducefn = reducefn
 
 results = s.run_server(password="changeme")
-elapsed = timeit.default_timer() - start_time
+elapsed = timeit.default_timer() - start_bins
 print "Total time", elapsed, "seconds"
 #print results
 totalResults = []

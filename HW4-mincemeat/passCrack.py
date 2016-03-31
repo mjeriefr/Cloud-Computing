@@ -1,8 +1,8 @@
 import mincemeat
+import sys
+import timeit
 
-file = open('small.txt', 'r')
-data = list(file)
-file.close()
+start_time = timeit.default_timer()
 
 #Assume passwords are 4 or fewer characters containing only lowercase letters and numbers.
 possibleChars = "abcdefghijklmnopqrstuvwxyz0123456789"
@@ -17,28 +17,38 @@ for char1 in list(possibleChars):
                 passwordSpace.append(char1 + char2 + char3 + char4)
 print "created passwordSpace"
 
-datasource = dict(enumerate(passwordSpace))
+#user input
+userInputHash = sys.argv[1]
+passwordInputDoubleSpace = []
+for i in range(0, len(passwordSpace)-1):
+    passwordInputDoubleSpace.append([userInputHash, passwordSpace[i]])
+
+#datasource = dict(enumerate(passwordSpace))
+datasource = dict(enumerate(passwordInputDoubleSpace))
 
 def mapfn(k, v):
     #print k, v
-    #if len(v) < 4:
-        #print "progress:", v
+    if len(v[1]) < 2:
+        print "progress:", v
     import hashlib
-    vHashed = hashlib.md5(str(v)).hexdigest()
-    five = vHashed[:5]
-    if five == "d077f" or five == "0832c" or five == "1a1dc" or five == "ee269" or five == "0fe63":
-        print v, "-->", five
-        yield v, five
+    vHashed = hashlib.md5(str(v[1])).hexdigest()
+    #five = vHashed[:5]
+    #if five == "d077f" or five == "0832c" or five == "1a1dc" or five == "ee269" or five == "0fe63":
+    if vHashed[:5] == v[0]:
+        print v[1], "-->", vHashed[:5]
+        yield v[1], vHashed[:5]
     #else:
-        #print v, "-//->", five
+        #print v, "-//->", vHashed[:5]
 
 def reducefn(k, vs):
     return vs
 
 s = mincemeat.Server()
 s.datasource = datasource
+#s.conf.set("inputHash", userInputHash)
 s.mapfn = mapfn
 s.reducefn = reducefn
 
 results = s.run_server(password="changeme")
 print results
+print "Time elapsed", (timeit.default_timer() - start_time)
