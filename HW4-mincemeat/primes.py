@@ -8,23 +8,41 @@ for i in array:
 datasource = dict( (k[0], k[1:]) for k in bins)
 #print datasource        
 
+##def mapfn(k, v):
+##    #print "map"
+##    limit = v[len(v)-1]
+##    #print "limit is", limit
+##    a = [True] * limit
+##    a[0] = a[1] = False
+##    for (i, isprime) in enumerate(a):
+##        if not (str(i) == str(i)[::-1]):
+##            #print i, " is not a palindrome"
+##            a[i] = False
+##    for (i, isprime) in enumerate(a):
+##        if isprime:
+##            #print "yield i", i
+##            yield k, i
+##            for n in xrange(i*i, limit, i):
+##                a[n] = False
+##    #print "a is", a
 def mapfn(k, v):
-    print "map"
-    limit = v[len(v)-1]
-    #print "limit is", limit
-    a = [True] * limit
-    a[0] = a[1] = False
-    for (i, isprime) in enumerate(a):
-        if not (str(i) == str(i)[::-1]):
-            #print i, " is not a palindrome"
-            a[i] = False
-    for (i, isprime) in enumerate(a):
-        if isprime:
-            #print "yield i", i
-            yield k, i
-            for n in xrange(i*i, limit, i):
-                a[n] = False
-    #print "a is", a
+    print "v is", v
+    for obj in v:
+        if obj % 2 == 0:
+            continue
+        if obj % 3 == 0:
+            continue
+        if not (str(obj) == str(obj)[::-1]):
+            continue
+
+        i = 5
+        w = 2
+        while i*i <= obj:
+            if obj % i == 0:
+                continue
+            i += w
+            w = 6 - w
+        yield k, obj
 
 
 def reducefn(k, x):
