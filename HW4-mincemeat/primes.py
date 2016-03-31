@@ -37,25 +37,25 @@ print "Elapsed time for creating bins is", elapsed_bins, "seconds"
 def mapfn(k, v):
     import math
     #print "Start map. k is", k, "v is", v
-    for obj in v:
-        if not (str(obj) == str(obj)[::-1]):
+    for vi in range(0, len(v)-1):
+        if not (str(v[vi]) == str(v[vi])[::-1]):
             continue
 
         #print "beginning primes checker on", obj
-        sqrtObj = math.sqrt(obj)
+        sqrtObj = math.sqrt(v[vi])
         i = 5
         w = 2
         isPrime = True
         while i <= sqrtObj and isPrime == True:
-            #print "i*i=", i*i, "=", obj, "= obj"
-            if obj % i == 0:
+            #print "i*i=", i*i, "=", v[vi], "= v[vi]"
+            if v[vi] % i == 0:
                 isPrime = False
             i += w
             w = 6 - w
             #print "end i =", i, "w =", w
         if isPrime == True:
-            #print "yielding", obj
-            yield k, obj
+            #print "yielding", v[vi]
+            yield k, v[vi]
 
 
 def reducefn(k, x):
@@ -82,6 +82,6 @@ for iBin in results:
         totalResults.append(item)
         #print item
 totalResults.sort()
-#print "length of results", len(totalResults)
-#print "sum of results", sum(totalResults)
-print totalResults
+print "length of results", len(totalResults)
+print "sum of results", sum(totalResults)
+#print totalResults
