@@ -41,6 +41,9 @@ def mapfn(k, v):
         if not (str(v[vi]) == str(v[vi])[::-1]):
             continue
 
+        ## NOTE: THIS PRIME CHECKING ALGORITHM IS
+        ## A HEURISTIC, NOT EXACT ALGORITHM. IT DOES
+        ## NOT FIND ALL POSSIBLE PRIMES
         #print "beginning primes checker on", obj
         sqrtObj = math.sqrt(v[vi])
         i = 5

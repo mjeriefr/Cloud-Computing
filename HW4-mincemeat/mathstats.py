@@ -1,6 +1,6 @@
 import mincemeat
 
-file = open('large.txt', 'r')
+file = open('medium.txt', 'r')
 data = list(file)
 file.close()
 
